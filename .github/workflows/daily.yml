@@ -1,0 +1,23 @@
+name: Actualizar Precios Diarios
+on:
+  schedule:
+    - cron: '0 11 * * *' # Corre todos los días a las 8AM (hora Arg aprox)
+  workflow_dispatch: # Permite ejecutarlo a mano para probar
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm install
+      - run: node scraper.js
+      - name: Commit y Push de los cambios
+        run: |
+          git config --global user.name "Scraper Bot"
+          git config --global user.email "bot@github.com"
+          git add data/precios.json
+          git commit -m "Actualización automática de precios" || exit 0
+          git push
