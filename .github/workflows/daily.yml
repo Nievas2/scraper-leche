@@ -1,7 +1,7 @@
 name: Actualizar Precios Diarios
 on:
-  schedule:
-    - cron: '0 11 * * *' # Corre todos los días a las 8AM (hora Arg aprox)
+ # schedule:
+ # - cron: '0 11 * * *' # Corre todos los días a las 8AM (hora Arg aprox)
   workflow_dispatch: # Permite ejecutarlo a mano para probar
 
 jobs:
